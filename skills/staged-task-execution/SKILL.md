@@ -78,9 +78,22 @@ temp/<feature-name>/
     ├── spec.md
     ├── backend.md
     └── ...others
+
+temp/archive/                  ← completed features are moved here
+└── <feature-name>/
+
+skills/staged-task-execution/scripts/
+├── setup.py                   ← creates the session folder structure
+└── archive.py                 ← moves a completed feature to temp/archive/
 ```
 
 **Naming convention:** Use a short English kebab-case description of the feature (e.g., `member-point-exchange`, `ai-campaign-push`, `device-info-panel`).
+
+**Use the setup script** to create the folder and empty stub files in one step:
+
+```shell
+python skills/staged-task-execution/scripts/setup.py <feature-name>
+```
 
 **References folder:** Create a `references/` subfolder and **immediately copy all user-provided materials into it**:
 
@@ -231,14 +244,27 @@ allowFreeformInput: true
 When all tasks are marked `[x]` in tasks.md:
 
 1. Update progress.md status to "Completed"
-2. Notify the user: "All [N] tasks complete. Context saved in `temp/<feature-name>/`."
-3. Optionally summarize what was built/changed
+2. **Archive the feature folder** by running the archive script:
+
+   ```shell
+   python skills/staged-task-execution/scripts/archive.py <feature-name>
+   ```
+
+   This moves `temp/<feature-name>/` to `temp/archive/<feature-name>/`.
+
+3. Notify the user: "All [N] tasks complete. Session context archived to `temp/archive/<feature-name>/`."
+4. Optionally summarize what was built/changed
 
 ---
 
 ## File Lifecycle
 
-The `temp/` folder is a **working scratchpad** — files there are not committed by default. The user may choose to delete them or archive them after the feature is complete.
+The `temp/` folder is a **working scratchpad** — files there are not committed by default.
+
+- `temp/<feature-name>/` — active session folder, created by `setup.py`
+- `temp/archive/<feature-name>/` — completed sessions, moved here automatically by Step 8 via `archive.py`
+
+The user may choose to delete the `temp/` folder entirely or keep the archive for future reference.
 
 ---
 
