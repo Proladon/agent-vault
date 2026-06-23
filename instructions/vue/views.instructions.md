@@ -1,6 +1,6 @@
 ---
-applyTo: 'src/views/**/*.vue'
-description: 'Coding standards for view-related files'
+applyTo: "src/views/**/*.vue"
+description: "Coding standards for view-related files"
 ---
 
 # Project coding standards for view-related files
@@ -20,7 +20,6 @@ description: 'Coding standards for view-related files'
     <ViewName>.vue        # 該頁面的主要單檔元件（SFC）
     types.ts             # 該頁面專用的 TypeScript 型別定義
     REDME.md             # 該頁面的說明文件
-    MIGRATION.md             # 該頁面的遷移指南（如有需要）
 ```
 
 - 建議事項：
